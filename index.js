@@ -30,10 +30,11 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
-  
+  --Skor1 de skor artışı sonucunu alabiliriz. Skor2 de anlık skor değerini alabiliriz.
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
-  
+  -- Skor1 de kullanılmıstır. Çünkü ana fonksiyonla paketlenmiştir.
   3. Hangi durumda skor1 tercih edilebilir? Hangi durumda skor2 daha mantıklıdır?
+
 */
 
 // skor1 kodları
@@ -64,11 +65,12 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+    let skor= Math.floor(Math.random()*16 + 10);
+    return skor;
 }
 
-
+console.log(takimSkoru());
 
 
 /* Görev 3: macSonucu() 
@@ -86,9 +88,20 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(callback, ceyrek){
+  let evSahibiSkor = 0;
+  let konukTakimSkor = 0;
+  for(let i=1; i<=ceyrek; i++){
+    evSahibiSkor += callback();
+    konukTakimSkor += callback();
+  }
+  let macBitisSkoru = {
+    "EvSahibi": evSahibiSkor,
+    "KonukTakim": konukTakimSkor
+  }
+  return macBitisSkoru;
 }
+console.log(macSonucu(takimSkoru, 4));
 
 
 
@@ -109,10 +122,15 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-
+function periyotSkoru(callback) {
+  let EvSahibi = callback();
+  let KonukTakim = callback();
+return {
+  "EvSahibi": EvSahibi,
+  "KonukTakim": KonukTakim
+};
 }
+console.log(periyotSkoru(takimSkoru));
 
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
